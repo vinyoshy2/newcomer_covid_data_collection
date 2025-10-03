@@ -1,9 +1,9 @@
-##Pipeline for generating newcomer dataset##
+## Pipeline for generating newcomer dataset ##
 
 Pipeline requires user to have pushshift dumpfiles stored in zip form. Data is processed by iteratively zipping monthly dump files, iterating over all comments, removing the unziped file, and proceeding to the next one.
 
 
-###newcomer\_generation.py ###
+### newcomer\_generation.py ###
 First run newcomer\_generation.py -- this does the first pass through the dump files, and will generate an initial pair of json files, each containing all the comments from r/coronavirus and r/china\_flu newcomers each month.
 
 The date range can be adjusted by adjusting the outermost for-loop, plus the init\_month/ and month break condition variables. Might be good to create a year range iterator to handle this logic in the future.
@@ -11,7 +11,7 @@ The date range can be adjusted by adjusting the outermost for-loop, plus the ini
 
 Each json file contains a dict where the element newcomer\_json[date][author] is a list contain all comments from author at date.
 
-###subreddit\_histories.py###
+### subreddit\_histories.py ###
 This script will take the newcomers from the previous run, and generate a list of subreddits they participated in in the month prior to joining r/coronavirus or r/china\_flu. Produces 3 jsons. edges\_china\_flu.json and edges\_coronavirus.json, which contain for each newcomer, a list of their prior subreddit interactions, and histories.json which contains for each time interval, a list of all background subreddits we will need to collect comments from in the final pass.
 
 
